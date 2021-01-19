@@ -1,0 +1,80 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <link rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+  <ion-card class="main">
+    <ion-card-header>
+       <ion-card-title class="saluteTitle">Parametrage de lieu de Travail</ion-card-title>
+    </ion-card-header>
+    <!-- duree-->
+    <ng-container *ngIf="Puser"> 
+      <div class="cardcontrol">
+    <ion-card class="cardlength rainbow">
+       <ion-card-header >
+         <ion-card-title class="salute">Durée de la Visite :</ion-card-title> 
+        </ion-card-header>
+       <ion-card-content>
+        <ngb-timepicker class="pickers" [(ngModel)]="Puser[0].param.Duree"  ></ngb-timepicker>
+       </ion-card-content>
+    </ion-card>
+    <!-- intervalle de visite-->
+    <ion-card class="cardlength">
+      <ion-card-header >
+        <ion-card-title class="salute">Intervalle entre chaque Visite :</ion-card-title> 
+       </ion-card-header>
+      <ion-card-content>
+        <ngb-timepicker  class="pickers" [(ngModel)]="Puser[0].param.WaitTime"  ></ngb-timepicker>
+      </ion-card-content>
+   </ion-card>
+  </div>
+   <!-- morning -->
+   <ion-card>
+    <ion-card-header >
+      <ion-card-title class="salute">Les Horaires du Matin : </ion-card-title> 
+     </ion-card-header>
+    <ion-card-content>
+      <ion-card-subtitle class="salute">De : </ion-card-subtitle>
+      <ngb-timepicker [(ngModel)]="Puser[0].param.StartMorning" (ngModelChange)="makelistoftimesMorning(Puser[0].param.StartMorning,Puser[0].param.Duree,Puser[0].param.WaitTime)" ></ngb-timepicker>
+      <ion-card-subtitle class="salute">Jusqu'a : </ion-card-subtitle>
+      <select [(ngModel)]="EndM" class="form-control selection" (change)="makelistoftimesNight(listoftimeM[this.EndM],Puser[0].param.Duree,Puser[0].param.WaitTime)">
+      <ng-container *ngFor="let item of listoftimeM; let i = index" >
+        <option value="{{i}}"> {{item.hour}}:
+           <ng-container *ngIf="item.minute<10" >0</ng-container>{{item.minute}} </option>
+      </ng-container> 
+       </select>
+    </ion-card-content>
+ </ion-card>
+ <!-- Evening -->
+ <ion-card>
+  <ion-card-header >
+    <ion-card-title class="salute">Les Horaires du Soir : </ion-card-title> 
+   </ion-card-header>
+  <ion-card-content>
+    <ion-card-subtitle class="salute">De : </ion-card-subtitle>
+    <select [(ngModel)]="StartE" class="form-control selection" (change)="makelistoftimesNightEnd(listoftimeES[StartE],Puser[0].param.Duree,Puser[0].param.WaitTime)">
+      <ng-container *ngFor="let item of listoftimeES; let i = index" >
+        <option value="{{i}}"> {{item.hour}}:<ng-container *ngIf="item.minute<10" >0</ng-container>{{item.minute}}</option>
+      </ng-container> 
+       </select>
+
+       <ion-card-subtitle class="salute">Jusqu'a : </ion-card-subtitle>
+       <select class="form-control selection" [(ngModel)]="EndE" >
+         <ng-container *ngFor="let item of listoftimeEE; let i = index" >
+           <option value="{{i}}"> {{item.hour}}:<ng-container *ngIf="item.minute<10" >0</ng-container>{{item.minute}}</option>
+         </ng-container> 
+          </select>
+  </ion-card-content>
+ </ion-card>
+</ng-container>
+<ion-button  color="success" (click)='savesettings()'>Enregistrer</ion-button>
+
+ </ion-card>
+</ion-content>

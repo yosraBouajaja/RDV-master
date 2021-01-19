@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="Term"
+    (ionChange)="setFilteredItems()"></ion-searchbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<!--filter:Term-->
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      
+      <ion-card-title>Liste de Mes Clients</ion-card-title>
+    </ion-card-header>
+    <ng-container *ngIf="Puser">
+    <ng-container *ngFor="let item of items">
+      <ion-item>
+        <ion-icon name="person-sharp" slot="start"></ion-icon>
+        <ion-label>{{item.Nom}}  {{item.Prenom}}</ion-label>
+      </ion-item>
+      <ion-card-content>
+       <p><ion-icon name="call-sharp"></ion-icon> {{item.NumT}} </p>
+       <ng-container *ngIf="item.Email!=''">
+        <p><ion-icon name="mail-sharp"></ion-icon> {{item.Email}}</p>
+       </ng-container> 
+      </ion-card-content>
+    </ng-container> 
+  </ng-container> 
+  </ion-card>
+  
+</ion-content>

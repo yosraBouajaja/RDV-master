@@ -1,0 +1,8 @@
+{
+  "name": "RDV",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

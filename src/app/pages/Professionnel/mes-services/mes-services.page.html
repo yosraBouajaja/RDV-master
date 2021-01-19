@@ -1,0 +1,84 @@
+<!--imports-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!--end of imports-->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>MesServices</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="show()"><ion-icon name="notifications-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-card [hidden]=hide style="position: fixed;    margin-left: 0%;right: 10px;top:50px;overflow:scroll;height:40%;overflow-y: clip;overflow-x: hidden;">
+    <ion-list >
+      <ng-container *ngIf="Notif" >
+      <ng-container *ngFor="let item of Notif.reverse();let i = index;">
+        <ion-item>
+          <ion-avatar slot="start">
+            <img [src]="notifstring[i]">
+          </ion-avatar>
+          <ion-label>
+            <h2> {{item.client.nom}} {{item.client.prenom}} </h2>
+            <h3> {{item.message}} </h3>
+            <p>le {{item.dateRDV}} à {{item.takentime.hour}}:<ng-container *ngIf="item.takentime.minute<10">0</ng-container>{{item.takentime.minute}}</p>
+          </ion-label>
+        </ion-item>
+      </ng-container> 
+    </ng-container>
+    </ion-list>
+  </ion-card>
+</ion-header>
+
+<ion-content>
+  
+  <ion-card>
+    <ion-card-header>
+     
+  
+      <ion-card-title>Liste de Mes Services</ion-card-title>
+    </ion-card-header>
+    <ion-item>
+     
+      <ion-button fill="outline" slot="end" (click)="presentAlertPrompt()" color='success'>Ajouter un Service</ion-button>
+    </ion-item>
+      <div class="container myTable">          
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Service</th>
+              <th>Coût</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="Puser">
+            <ng-container *ngFor="let UserService of Puser[0].MesServices;let i = index">
+             <tr>
+               <td><ion-checkbox (ionChange)='ActivateService(i)' checked={{UserService.Active}}></ion-checkbox></td>
+               <td class='thetablerows'><input style="width: 50%;" type="text" id="name{{i}}" class="form-control " value={{UserService.Service}} required></td>
+               <td class='thetablerows'>
+                <div class="input-group ">
+                  <div class="col-xs-2">
+                    <input style="width: 50%;" type="number" id="cout{{i}}" class="form-control " value={{UserService.Cout}} >
+                </div>
+                  </div>  
+               </td>
+               <td>
+                 <ion-button color='success'(click)="modifierCout(i)"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+                 <ion-button color='danger' style="margin-left:3%;"(click)="supprimerService(i)"><ion-icon name="trash-bin"></ion-icon></ion-button>
+               </td>
+             </tr>
+            </ng-container> 
+          </ng-container> 
+          </tbody>
+        </table>
+      </div>
+
+  </ion-card>
+</ion-content>

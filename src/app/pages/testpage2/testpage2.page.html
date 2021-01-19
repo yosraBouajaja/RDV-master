@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<ion-header>
+  <ion-toolbar>
+    <ion-title>MesServices</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    
+ 
+  </ion-toolbar>
+ 
+</ion-header>
+
+  <ion-content>
+    <ion-item>
+      <ion-label><ion-icon name="person"></ion-icon></ion-label>
+      <ion-select interface="popover">
+        <ion-select-option value="nes">NES</ion-select-option>
+        <ion-select-option value="n64">Nintendo64</ion-select-option>
+        <ion-select-option value="ps">PlayStation</ion-select-option>
+        <ion-select-option value="genesis">Sega Genesis</ion-select-option>
+        <ion-select-option value="saturn">Sega Saturn</ion-select-option>
+        <ion-select-option value="snes">SNES</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button (click)="ReporterRDV()"></ion-button>
+  </ion-content>
+

@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title>Reporter</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title></ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <img src="../../../../assets/1572663.svg" />
+    <ion-item>  
+      <ng-container *ngIf="Puser; else elsePuser" >
+          <ion-label class="salute Appfontfamily"><ion-icon style="color:lightgreen" name="calendar-outline"></ion-icon> Date : </ion-label>
+          <ion-datetime (ionChange)="filteringarray();" done-text="Confirmer" cancel-text="Annuler" [(ngModel)]="chosenDate" displayFormat="DD/MM/YYYY"  min="{{date}}" max="{{date2}}" placeholder="Select Date"></ion-datetime>
+        </ng-container>
+        <ng-template #elsePuser>
+          <ion-label class="salute Appfontfamily"><ion-icon style="color:lightgreen" name="calendar-outline"></ion-icon> Date : </ion-label>
+        </ng-template>
+        </ion-item>
+        <ion-item>
+          <ng-container *ngIf="Cuser; else Heure" >
+          <ion-label class="salute Appfontfamily"><ion-icon style="color:red" name="time-outline"></ion-icon>Ancien rendez-vous :</ion-label>
+         <ion-label style="position: absolute;top: 15%;right:16px">{{Cuser[0].mesRDV[Cuser[0].mesRDV.length-1].ClientsRDVs[0].tempsRDV.hour}}:<ng-container *ngIf="Cuser[0].mesRDV[Cuser[0].mesRDV.length-1].ClientsRDVs[0].tempsRDV.minute<9">0</ng-container>{{Cuser[0].mesRDV[Cuser[0].mesRDV.length-1].ClientsRDVs[0].tempsRDV.minute}}</ion-label>
+        </ng-container>
+        <ng-template #Heure>
+          <ion-label class="salute Appfontfamily"><ion-icon style="color:blue" name="time-outline"></ion-icon>Ancien rendez-vous :</ion-label>
+        </ng-template>
+        </ion-item>
+          <ion-item>
+            <ng-container *ngIf="listRDV!=undefined" >
+              <ng-container *ngIf="listRDV.length==0" > 
+                <ion-avatar slot="start">
+                  <ion-icon style="color:blue" name="time-outline"></ion-icon>
+                </ion-avatar>
+                <ion-label class="salute">
+                <h2 class="Appfontfamily"> Nouvelle heure :</h2>
+                 <p class="Appfontfamily">Veuillez choisir une autre date</p></ion-label>
+                </ng-container>
+              <ng-container *ngIf="listRDV.length>0" >
+                <ion-label class="salute Appfontfamily"><ion-icon style="color:blue" name="time-outline"></ion-icon>Nouvelle heure : </ion-label>
+            <ion-select ok-text="Confirmer" cancel-text="Annuler" [(ngModel)]="chosentime">
+              <ng-container *ngFor="let item of listRDV;let i =index"> 
+              <ion-select-option class="Appfontfamily" value="{{i}}"> {{item.hour}}:<ng-container *ngIf="item.minute<10" >0</ng-container>{{item.minute}}</ion-select-option>
+            </ng-container>
+            </ion-select>
+          </ng-container>
+          </ng-container>
+          </ion-item>
+          <!--Choosing Services-->
+        <ng-container *ngIf="Puser">
+          <ion-list>
+            <ion-list-header class='salute Appfontfamily'><ion-icon style="color:orange" name="book-outline"></ion-icon> Service : </ion-list-header>
+         <ng-container *ngFor="let item of Puser[0].MesServices;let i=index">
+           <ng-container *ngIf="item.Active==true" >
+            <ion-item>
+            <ion-label class="Appfontfamily">{{item.Service}}</ion-label>
+            <ion-checkbox id={{i}} color="success"  slot="start"></ion-checkbox>
+            </ion-item>
+        </ng-container>
+         </ng-container> 
+        </ion-list>
+       
+        <!--End of Choosing Services-->
+       
+      </ng-container> 
+    </ion-card-content>
+    <div class="row">
+    <ion-button class="Appfontfamily" color="danger" style="margin-left:8%;" (click)="annuler()" >Annuler</ion-button>
+    <ion-button class="Appfontfamily"style="margin-left:23%;" (click)="saveRDV()" >Reporter</ion-button>
+  </div>
+  </ion-card>
+<ion-datetime></ion-datetime>
+</ion-content>

@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title class="Appfontfamily">Mes rendez-vous</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <body>
+  <div class="profile-content">
+    <!-- begin tab-content -->
+    <div class="tab-content p-0">
+       <!-- begin #profile-post tab -->
+       <div class="tab-pane fade active show" id="profile-post">
+          <!-- begin timeline -->
+          <ul class="timeline">
+            <ng-container *ngIf="Cuser">
+              <ng-container *ngFor="let item of Cuser[0].mesRDV;let i=index">
+                <ng-container *ngFor="let item2 of item.ClientsRDVs;let j=index">
+             <li>
+                <!-- begin timeline-time -->
+                <div class="timeline-time">
+                   <span class="date Appfontfamily"> {{item.Date}} </span>
+                   <span class="time Appfontfamily"> {{item2.tempsRDV.hour}}:<ng-container *ngIf="item2.tempsRDV.minute<10">0</ng-container>{{item2.tempsRDV.minute}}</span>
+                </div>
+                <!-- end timeline-time -->
+                <!-- begin timeline-icon -->
+                <div class="timeline-icon">
+                   <a href="javascript:;">&nbsp;</a>
+                </div>
+               
+                <div class="timeline-body">
+                   <div class="timeline-content">
+                      <p>
+                        <ng-container *ngFor="let item3 of item2.Service">
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="row">
+                              <p class="salute Appfontfamily">{{item3.Service}} : {{item3.Cout}} TND</p>  
+                            </div>
+                           
+                          </div>
+                         
+                        </div>
+                      </ng-container>
+                      
+                      </p>
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="salute Appfontfamily" style="font-size: 16px;">Consultation totale : </h5>
+                        </div>
+                        <div class="card-body">
+                          <p style="color: crimson;margin-left: 69%;"class="card-text Appfontfamily">{{calculsom(i,j)}} TND</p>
+                        </div>
+                      </div>
+                   </div>
+                </div>
+             </li>
+          </ng-container> 
+        </ng-container> 
+      </ng-container> 
+          </ul>
+          <!-- end timeline -->
+       </div>
+       <!-- end #profile-post tab -->
+    </div>
+    <!-- end tab-content -->
+ </div>
+</body>
+</ion-content>

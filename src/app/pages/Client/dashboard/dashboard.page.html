@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar class='maintitle'>
+    <ion-searchbar [(ngModel)]="Term"
+    (ionChange)="setFilteredItems()"></ion-searchbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<body>
+    <ion-list *ngFor="let item of items">
+    <ion-item> 
+      <ng-container *ngIf="item.Genre== 'Male'">
+        <ion-avatar slot="start">
+          <img src="../../assets/icon/blank-profile-man.jpg">
+        </ion-avatar>
+      </ng-container> 
+      <ng-container *ngIf="item.Genre == 'Female'">
+        <ion-avatar slot="start">
+          <img src="../../assets/icon/blank-profile-female.jpg">
+        </ion-avatar>
+      </ng-container> 
+      <ion-label>
+        <h3>{{item.nom}} {{ item.prenom }}</h3>
+        <p>{{ item.Profession }}</p>
+      </ion-label>
+      </ion-item>
+  </ion-list>
+
+</body>

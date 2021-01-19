@@ -1,0 +1,104 @@
+.salute{
+    font-weight: bold;
+    font-family: "Arial", Times, serif;
+  }
+.saluteTitle{
+    font-weight: bold;
+    font-size: 36px;
+    font-family: "Times New Roman", Times, serif;
+    text-decoration: underline;
+}
+ion-card{
+  padding: 2rem;
+}
+.ngb-tp{
+  margin-left:115%;
+}
+.cardlength{
+  width:40%;
+  margin-right: 8%;
+  margin-left: 2%;
+}
+.cardcontrol .cardlength{
+  display: inline-block;
+}
+ion-button{
+  margin:3%;
+  margin-left: 80%;
+}
+.main{
+ 
+    overflow: auto;
+}
+.selection{
+  font-weight: bold;
+  font-size: larger;
+  font-family: Arial, Helvetica, sans-serif;
+  color:black;
+  border: 1px ;
+
+  background-color: #ffb;  margin-top: 3%;
+  margin-bottom: 3%;
+  width:30%;
+}
+.duree{
+  width:40%;
+  display: inline;
+}
+.intervalle{
+  width:50%;
+}
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+@keyframes rotate {
+	100% {
+		transform: rotate(1turn);
+	}
+}
+
+ion-card ion-card:hover {
+	position: relative;
+	z-index: 0;
+	
+	height: 100%;
+	border-radius: 10px;
+	overflow: hidden;
+	
+	
+	&::before {
+		content: '';
+		position: absolute;
+		z-index: -2;
+		left: -50%;
+		top: -50%;
+		width: 200%;
+		height: 200%;
+		background-color: #399953;
+		background-repeat: no-repeat;
+		background-size: 60% 60%, 60% 60%;
+		background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+		background-image: linear-gradient(#d8cc20, #deeb31), linear-gradient(#fbb300, #fbb300), linear-gradient(#d53e33, #d53e33), linear-gradient(#f53757, #ee60a2);
+		animation: rotate 7s linear infinite;
+	}
+	
+	&::after {
+		content: '';
+		position: absolute;
+		z-index: -1;
+		left: 6px;
+		top: 6px;
+		width: calc(100% - 12px);
+		height: calc(100% - 12px);
+		background: white;
+		border-radius: 2px;
+	}
+}

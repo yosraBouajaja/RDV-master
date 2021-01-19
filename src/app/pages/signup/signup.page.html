@@ -1,0 +1,117 @@
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js'></script>
+<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"/>
+<ion-header>
+  
+</ion-header>
+
+<ion-content padding>
+<body>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <ion-img src='../assets/icon/login-icon.png' class="center"></ion-img>
+            <h5 class="card-title text-center salute Appfontfamily">Inscription</h5>
+            <div class="form-signin">
+             
+              <div class="form-label-group">
+                <ion-label for="inputNom" class="salute Appfontfamily">Nom : </ion-label>
+                <ion-input type="text" id="inputNom" class="form-control"  [(ngModel)]='nom' placeholder="Nom" required autofocus></ion-input>
+               
+              </div>
+
+              <div class="form-label-group">
+                <ion-label for="inputPrenom"class="salute Appfontfamily">Prénom : </ion-label>
+                <ion-input type="text" id="inputPrenom" class="form-control"  [(ngModel)]='prenom' placeholder="Prénom" required autofocus></ion-input>
+                
+              </div>
+
+              <div class="form-label-group">
+                <ion-label for="inputDate"class="salute Appfontfamily"> <ion-icon name="calendar-outline"></ion-icon> Date de naissance : </ion-label>
+                <ion-datetime  done-text="Confirmer" cancel-text="Annuler" [(ngModel)]="DateN" displayFormat="DD/MM/YYYY"  min="1900-01-30" max="2020-12-30" placeholder="Select Date"></ion-datetime>
+   
+              </div>
+                  
+              <div class="form-label-group">
+                <ion-label for="inputNum"class="salute Appfontfamily"> <ion-icon name="call-outline"></ion-icon> Numéro du téléphone : </ion-label>
+                <ion-input type="number"  max="8" id="inputNum" class="form-control"  [(ngModel)]='NumT' placeholder="Numéro du téléphone" required autofocus></ion-input>
+                
+              </div>
+
+              <div class='form-label-group'>
+                <ion-radio-group [(ngModel)]='genre'  value="Male">
+                  <ion-list-header>
+                    <ion-label class="salute Appfontfamily">Sexe</ion-label>
+                  </ion-list-header>
+            
+                  <ion-item>
+                    <ion-label class="salute Appfontfamily"><ion-icon name="male-outline" ></ion-icon>  Homme</ion-label>
+                    <ion-radio slot="start" color="tertiary" value="Male"></ion-radio>
+                  </ion-item>
+            
+                  <ion-item>
+                    <ion-label class="salute Appfontfamily"><ion-icon name="female-outline" ></ion-icon>  Femme</ion-label>
+                    <ion-radio slot="start" color="tertiary" value="Female"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+              </div>
+               
+              <div class="form-label-group">
+                <ion-label for="inputEmail" class="salute Appfontfamily"><ion-icon name="mail-outline"></ion-icon> Email : </ion-label>
+                <ion-input type="email" id="inputEmail" class="form-control"  [(ngModel)]='email' placeholder="Adresse email" required autofocus></ion-input>
+                
+              </div>
+
+              <div class="form-label-group">
+                <ion-label for="inputPassword" class="salute Appfontfamily"><ion-icon name="lock-closed-outline"></ion-icon> Mot de passe : </ion-label>
+                <ion-input type="password" id="inputPassword" class="form-control"  [(ngModel)]='pass' placeholder="Mot de passe " required></ion-input>
+                
+              </div>
+              <ng-container *ngIf="pass">
+                <span class="text-art Appfontfamily">
+                  <ng-container *ngIf="hasnumber()" ><ion-icon style="font-size: 20px;color : #5cb85c;" name="checkmark-circle"></ion-icon>
+                </ng-container>
+                <ng-container *ngIf="!hasnumber()" ><ion-icon class="primary" style="font-size: 20px;color : #d9534f;" name="close-circle"></ion-icon>
+                </ng-container>
+                  Contient un chiffre</span><BR>
+                  <span class="text-art Appfontfamily">
+                    <ng-container *ngIf="hasUppercase()" ><ion-icon style="font-size: 20px;color : #5cb85c;" name="checkmark-circle"></ion-icon>
+                  </ng-container>
+                  <ng-container *ngIf="!hasUppercase()" ><ion-icon class="primary" style="font-size: 20px;color : #d9534f;" name="close-circle"></ion-icon>
+                  </ng-container>
+                    Contient un Charactere Majuscule</span><BR>
+                    <span class="text-art Appfontfamily">
+                      <ng-container *ngIf="hasLowercase()" ><ion-icon style="font-size: 20px;color : #5cb85c;" name="checkmark-circle"></ion-icon>
+                    </ng-container>
+                    <ng-container *ngIf="!hasLowercase()" ><ion-icon class="primary" style="font-size: 20px;color : #d9534f;" name="close-circle"></ion-icon>
+                    </ng-container>
+                      Contient un Charactere Miniscule</span><BR>
+                      <span class="text-art Appfontfamily">
+                        <ng-container *ngIf="longerthan8()" ><ion-icon style="font-size: 20px;color : #5cb85c;" name="checkmark-circle"></ion-icon>
+                      </ng-container>
+                      <ng-container *ngIf="!longerthan8()" ><ion-icon class="primary" style="font-size: 20px;color : #d9534f ;" name="close-circle"></ion-icon>
+                      </ng-container>
+                        Contient 8 Characteres Minimum</span><BR>
+                </ng-container> 
+              <div class="form-label-group">
+                <ion-label for="inputPassword2" class="salute Appfontfamily"> <ion-icon name="lock-closed-outline"></ion-icon> Confirmation mot de passe : </ion-label>
+                <ion-input type="password" id="inputPassword2" class="form-control"  [(ngModel)]='Verifpass' placeholder="Mot de passe" required></ion-input>
+                
+              </div>
+              
+              <button class="btn btn-lg btn-primary btn-block text-uppercase Appfontfamily" (click)='Inscrire();' >Inscription</button> 
+            <hr>
+            <button class="btn btn-lg btn-danger btn-block text-uppercase Appfontfamily" (click)='navLogin();' >Login</button> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</ion-content>

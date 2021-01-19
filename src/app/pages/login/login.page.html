@@ -1,0 +1,71 @@
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js'></script>
+<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
+<ion-content>
+
+  <body>
+    <div class="container">
+      <div class="row ">
+
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto ">
+          <div class="card card-signin my-5 ">
+            <div class="card-body">
+              <ion-img src='../assets/icon/login-icon.png' class="center"></ion-img>
+              <h5 class="card-title text-center salute Appfontfamily">Bienvenue</h5>
+              <div class="form-signin">
+
+                <div class="form-label-group">
+                  <ion-label for="inputEmail" class="salute Appfontfamily">
+                    <ion-icon name="person-outline"></ion-icon> Adresse email :
+                  </ion-label>
+                  <ion-input type="text" id="inputEmail" [(ngModel)]='email' placeholder='Adresse Mail' required
+                    autofocus></ion-input>
+
+                </div>
+
+                <div class="form-label-group" *ngIf="showPassword">
+                  <div class="row">
+                    <ion-label style="margin-left: 4%; margin-right: 18%; " for="inputPassword"
+                      class="salute Appfontfamily">
+                      <ion-icon name="lock-closed-outline"></ion-icon>Mot de passe :
+                    </ion-label>
+                    <ion-icon slot="end" color="primary" name="eye" (click)="togglePasswordText()"></ion-icon>
+                  </div>
+                  <ion-input style="margin-left: 4%;" type="password" id="inputPassword" [(ngModel)]='pass'
+                    placeholder='*********' required></ion-input>
+
+                </div>
+                <div class="form-label-group" *ngIf="!showPassword">
+                  <div class="row">
+                    <ion-label style="margin-left: 4%; margin-right: 18%; " for="inputPassword"
+                      class="salute Appfontfamily">
+                      <ion-icon name="lock-closed-outline"></ion-icon>Mot de passe :
+                    </ion-label>
+                    <ion-icon slot="end" color="medium" name="eye-off" (click)="togglePasswordText()"></ion-icon>
+                  </div>
+                  <ion-input style="margin-left: 4%;" type="text" id="inputPassword" [(ngModel)]='pass'
+                    placeholder='*********' required></ion-input>
+
+                </div>
+                <div style='margin-bottom:3%;' class='forgot'>
+
+                </div>
+                <button class="btn btn-lg btn-primary btn-block text-uppercase Appfontfamily" (click)='login()'>Se
+                  connecter</button>
+                <hr>
+                <div style='margin-bottom:3%;' class='forgot' [hidden]=isdesktop>
+                  <a class='mb-1 Appfontfamily' style='font-family: Arial, Helvetica, sans-serif;'
+                    (click)='signup()'>Créer un nouveau compte</a>
+                </div>
+
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</ion-content>

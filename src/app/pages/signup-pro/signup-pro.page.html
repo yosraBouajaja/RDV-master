@@ -1,0 +1,135 @@
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js'></script>
+<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"/>
+<ion-content padding>
+<body>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-sm-9 col-md-7 col-lg-12 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <ion-img src='../assets/icon/login-icon.png' class="center"></ion-img>
+            <h5 class="card-title text-center salute">Inscription</h5>
+            <div class="form-signin">
+             
+              <div class="form-label-group">
+                <ion-label for="inputNom" class="salute">Nom : </ion-label>
+                <ion-input type="text" id="inputNom" class="form-control"  [(ngModel)]='nom' placeholder="Nom" required autofocus></ion-input>
+                
+              </div>
+
+              <div class="form-label-group">
+                <ion-label for="inputPrenom"class="salute">Prenom : </ion-label>
+                <ion-input type="text" id="inputPrenom" class="form-control"  [(ngModel)]='prenom' placeholder="Prenom" required autofocus></ion-input>
+                
+              </div>
+
+              <div class="form-label-group">
+                <ion-label for="inputDate"class="salute"> <ion-icon name="calendar-outline"></ion-icon> Date de Naissance : </ion-label>
+                <ion-input type="Date" id="inputDate" class="form-control"  [(ngModel)]='DateN' placeholder="Date de Naissance" required autofocus></ion-input>
+              </div>
+                  
+              <div class="form-label-group">
+                <ion-label for="inputNum"class="salute"> <ion-icon name="phone-portrait-outline"></ion-icon> Numero du Téléphone : </ion-label>
+                <ion-input type="number" id="inputNum" class="form-control"  [(ngModel)]='NumT' placeholder="Numero du Téléphone" required autofocus></ion-input>
+                
+              </div>
+
+              <div class="form-label-group">
+                <ion-label for="inputNum"class="salute"> <ion-icon name="call-outline"></ion-icon> Numero Fix : </ion-label>
+                <ion-input type="number" id="inputNum" class="form-control"  [(ngModel)]='NumF' placeholder="Numero du Téléphone" required autofocus></ion-input>
+                
+              </div>
+
+              <div class='form-label-group'>
+                <ion-radio-group [(ngModel)]='genre'  value="Male">
+                  <ion-list-header>
+                    <ion-label class="salute">Genre</ion-label>=
+                  </ion-list-header>
+            
+                  <ion-item>
+                    <ion-label class="salute"><ion-icon name="male-outline" ></ion-icon>  Male</ion-label>
+                    <ion-radio slot="start" color="tertiary" value="Male"></ion-radio>
+                  </ion-item>
+            
+                  <ion-item>
+                    <ion-label class="salute"><ion-icon name="female-outline" ></ion-icon>  Female</ion-label>
+                    <ion-radio slot="start" color="tertiary" value="Female"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+              </div>
+              <div class='form-label-group'>
+                <ion-label><ion-icon name="briefcase-outline"></ion-icon> Profession</ion-label>
+                <ion-select ok-text='Selectionner' cancelText='Annuler' [(ngModel)]='Profession' >
+                  <ion-select-option value='null'>Veuillez Selectionner une Profession</ion-select-option>
+                  <ion-select-option value='Medecin Générale'>Médecin généraliste</ion-select-option>
+                  <ion-select-option value='Medecin Spécialiste'>Médecin spécialiste</ion-select-option>
+                  <ion-select-option value='Dentiste'>Dentiste  </ion-select-option>
+                  <ion-select-option value='Kinésithérapie'>Kinésithérapie</ion-select-option>
+                  <ion-select-option value='Opticien'>Opticien</ion-select-option>
+                  <ion-select-option value='Puériculture'>Puériculture</ion-select-option>
+                  <ion-select-option value='Nutritionniste'>Nutritionniste</ion-select-option>
+                  <ion-select-option value='Avocat'>Avocat</ion-select-option>
+                  <ion-select-option value='Coiffure'>Coiffure</ion-select-option>
+                  <ion-select-option value='Vétérinaire'>Vétérinaire</ion-select-option>
+                  <ion-select-option value='Architect'>Architect</ion-select-option>
+                  <ion-select-option value='Architect'>Autre</ion-select-option>
+                </ion-select>
+              </div>
+              <div class="form-label-group">
+                <ion-label for="inputEmail" class="salute"><ion-icon name="mail-outline"></ion-icon> Email : </ion-label>
+                <ion-input type="text" id="inputEmail" class="form-control"  [(ngModel)]='email' placeholder="Adresse Email" required autofocus></ion-input>
+                
+              </div>
+               
+              <div class="form-label-group">
+                <ion-label for="inputPassword" class="salute"><ion-icon name="lock-closed-outline"></ion-icon> Mot de Passe : </ion-label>
+                <ion-input type="password" id="inputPassword" class="form-control" (keydown)="hasnumber();" [(ngModel)]='pass' placeholder="Mot de Passe " required></ion-input>
+                
+              </div>
+              <ng-container *ngIf="pass">
+                  <span class="text-art">
+                    <ng-container *ngIf="hasnumber()" ><ion-icon style="font-size: 20px;color : #5cb85c;" name="checkmark-circle"></ion-icon>
+                  </ng-container>
+                  <ng-container *ngIf="!hasnumber()" ><ion-icon class="primary" style="font-size: 20px;color : #d9534f;" name="close-circle"></ion-icon>
+                  </ng-container>
+                    Contient un chiffre</span><BR>
+                    <span class="text-art">
+                      <ng-container *ngIf="hasUppercase()" ><ion-icon style="font-size: 20px;color : #5cb85c;" name="checkmark-circle"></ion-icon>
+                    </ng-container>
+                    <ng-container *ngIf="!hasUppercase()" ><ion-icon class="primary" style="font-size: 20px;color : #d9534f;" name="close-circle"></ion-icon>
+                    </ng-container>
+                      Contient un Charactere Majuscule</span><BR>
+                      <span class="text-art">
+                        <ng-container *ngIf="hasLowercase()" ><ion-icon style="font-size: 20px;color : #5cb85c;" name="checkmark-circle"></ion-icon>
+                      </ng-container>
+                      <ng-container *ngIf="!hasLowercase()" ><ion-icon class="primary" style="font-size: 20px;color : #d9534f;" name="close-circle"></ion-icon>
+                      </ng-container>
+                        Contient un Charactere Miniscule</span><BR>
+                        <span class="text-art">
+                          <ng-container *ngIf="longerthan8()" ><ion-icon style="font-size: 20px;color : #5cb85c;" name="checkmark-circle"></ion-icon>
+                        </ng-container>
+                        <ng-container *ngIf="!longerthan8()" ><ion-icon class="primary" style="font-size: 20px;color : #d9534f ;" name="close-circle"></ion-icon>
+                        </ng-container>
+                          Contient 8 Characteres Minimum</span><BR>
+                  </ng-container> 
+              <div class="form-label-group"style="margin-top:2%;">
+                <ion-label for="inputPassword2" class="salute"> <ion-icon name="lock-closed-outline"></ion-icon> Vérification M.D.P : </ion-label>
+                <ion-input type="password" id="inputPassword2" class="form-control"  [(ngModel)]='Verifpass' placeholder="Vérification M.D.P" required></ion-input>
+                
+              </div>
+              
+              <button class="btn btn-lg btn-primary text-uppercase inscrire salute" (click)='Inscrire();' >Inscription</button> 
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</ion-content>

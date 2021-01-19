@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title class="Appfontfamily">Rendez-vous</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <img src="../../../../assets/myrdv.jpg" />
+    <ion-card-header>
+     
+      <ion-card-title style='margin: 5%;' class="Appfontfamily">Votre rendez-vous est dans :</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="container">
+        <div id="countdown">
+          <ul>
+            <li><span id="days"class="Appfontfamily jours"></span>Jours</li>
+            <li><span id="hours"class="Appfontfamily hour"></span>Heures</li>
+            <li><span id="minutes"class="Appfontfamily minute"></span>Minutes</li>
+            <li><span id="seconds"class="Appfontfamily seconds"></span>Secondes</li>
+          </ul>
+          <h2 [hidden]=!noRDV class="Appfontfamily" style="margin-bottom: 7%;">Aucun rendez-vous</h2>
+        </div>
+        <div class="message">
+          <div id="content">
+            <span class="emoji">🥳</span>
+            <span class="emoji">🎉</span>
+            <span class="emoji">🎂</span>
+          </div>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <div [hidden]=noRDV>
+  <ion-button [hidden]=noRDV class="Appfontfamily" fill="outline" size="small"color="danger" style="margin-left: 3%;" (click)="annuler()">Annuler</ion-button>
+  <ion-button fill="outline" class="Appfontfamily"  size="small"color="primary" style="margin-left: 67%;" (click)="reporter()">Reporter</ion-button>
+</div>
+</ion-content>
+

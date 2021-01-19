@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title class="Appfontfamily">Horaire</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+ 
+</ion-header>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/themes/prism.css" />
+<body>
+  <ng-container *ngIf="Puser; else elsehoraire" >
+  <div style="margin-top: 15%;" class="col-md-8">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+        <ion-icon name="sunny-outline" ></ion-icon><h6 class="mb-0 Appfontfamily">Matin: </h6>
+        <span class="text-secondary"></span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+        <h6 class="mb-0 Appfontfamily">De</h6>
+        <span class="text-secondary Appfontfamily">{{Puser[0].param.StartMorning.hour}}:<ng-container *ngIf="Puser[0].param.StartMorning.minute<9">0</ng-container>{{Puser[0].param.StartMorning.minute}}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+        <h6 class="mb-0 Appfontfamily">Jusqu'à</h6>
+        <span class="text-secondary Appfontfamily">{{Puser[0].param.EndMorning.hour}}:<ng-container *ngIf="Puser[0].param.EndMorning.minute<9">0</ng-container>{{Puser[0].param.EndMorning.minute}}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+        <ion-icon name="moon-outline"></ion-icon><h6 class="mb-0 Appfontfamily">Soir: </h6>
+        <span class="text-secondary"></span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+        <h6 class="mb-0 Appfontfamily">De</h6>
+        <span class="text-secondary Appfontfamily">{{Puser[0].param.StartEvening.hour}}:<ng-container *ngIf="Puser[0].param.StartEvening.minute<9">0</ng-container>{{Puser[0].param.StartEvening.minute}}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+        <h6 class="mb-0 Appfontfamily">Jusqu'à</h6>
+        <span class="text-secondary Appfontfamily">{{Puser[0].param.EndEvening.hour}}:<ng-container *ngIf="Puser[0].param.EndEvening.minute<9">0</ng-container>{{Puser[0].param.EndEvening.minute}}</span>
+      </li>
+    </ul>
+  </div>
+</ng-container>
+<ng-template #elsehoraire>
+  <div style="margin-top: 15%;" class="col-md-8">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+        <ion-icon name="sunny-outline" ></ion-icon><h6 class="mb-0 Appfontfamily">Matin: </h6>
+        <span class="text-secondary"></span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+        <h6 class="mb-0 Appfontfamily">De</h6>
+        <span class="text-secondary Appfontfamily"></span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+        <h6 class="mb-0 Appfontfamily">Jusqu'à</h6>
+        <span class="text-secondary Appfontfamily"></span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+        <ion-icon name="moon-outline"></ion-icon><h6 class="mb-0 Appfontfamily">Soir: </h6>
+        <span class="text-secondary"></span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+        <h6 class="mb-0 Appfontfamily">De</h6>
+        <span class="text-secondary Appfontfamily"></span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+        <h6 class="mb-0 Appfontfamily">Jusqu'à</h6>
+        <span class="text-secondary Appfontfamily"></span>
+      </li>
+    </ul>
+  </div>
+</ng-template>
+
+</body>
+

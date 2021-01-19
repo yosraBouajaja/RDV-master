@@ -1,0 +1,252 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/themes/prism.css" />
+<ion-header>
+  <ion-toolbar>
+    <ion-searchbar  [(ngModel)]="Term"
+    (ionChange)="setFilteredItems()" [hidden]=!clientpass></ion-searchbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="show()"><ion-icon name="notifications-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-card [hidden]=hide style="position: fixed;    margin-left: 0%;right: 10px;top:50px;overflow:scroll;height:40%;overflow-y: clip;overflow-x: hidden;">
+    <ion-list >
+      <ng-container *ngIf="Notif" >
+      <ng-container *ngFor="let item of Notif;let i = index;">
+        <ion-item>
+          <ion-avatar slot="start">
+            <img [src]="notifstring[i]">
+          </ion-avatar>
+          <ion-label>
+            <h2> {{item.client.nom}} {{item.client.prenom}} </h2>
+            <h3> {{item.message}} </h3>
+            <p>le {{item.dateRDV}} à {{item.takentime.hour}}:<ng-container *ngIf="item.takentime.minute<10">0</ng-container>{{item.takentime.minute}}</p>
+          </ion-label>
+        </ion-item>
+      </ng-container> 
+    </ng-container>
+    </ion-list>
+  </ion-card>
+</ion-header>
+<!--filter:Term-->
+<ion-content>
+  <!--  
+    <ion-card>
+    <ion-card-header>
+      
+      <ion-card-title>Liste de Mes Clients</ion-card-title>
+    </ion-card-header>
+    <ng-container *ngIf="Puser">
+    <ng-container *ngFor="let item of items">
+      <ion-item>
+        <ion-icon name="person-sharp" slot="start"></ion-icon>
+        <ion-label>{{item.Nom}}  {{item.Prenom}}</ion-label>
+      </ion-item>
+      <ion-card-content>
+       <p><ion-icon name="call-sharp"></ion-icon> {{item.NumT}} </p>
+       <ng-container *ngIf="item.Email!=''">
+        <p><ion-icon name="mail-sharp"></ion-icon> {{item.Email}}</p>
+       </ng-container> 
+      </ion-card-content>
+    </ng-container> 
+  </ng-container> 
+  </ion-card>-->
+  <ion-card>
+    <ion-card-header>
+      <div class="row">
+        <ion-card-title>Liste de Mes Clients</ion-card-title>
+        <div class="row" style="position: absolute;
+        right: 37px;">
+          <h5>Clients</h5>
+          <ion-toggle [(ngModel)]="clientpass"></ion-toggle>
+          <h5>Clients passager</h5>
+        </div>
+        
+
+      </div>
+      
+    </ion-card-header>
+    <ion-item>
+     
+      <ion-button fill="outline" slot="end" color='success' [hidden]=!clientpass (click)="openModal(Client,'Ajouter')">Ajouter un Client</ion-button>
+    </ion-item>
+      <div class="container myTable">          
+        <table class="table .table-bordered">
+          <thead>
+            <tr>
+              <th  scope="col"><ion-icon name="person-sharp"></ion-icon>Nom & Prenom</th>
+              <th scope="col"><ion-icon name="mail-sharp"></ion-icon>Adresse Email</th>
+              <th scope="col"><ion-icon name="call-sharp"></ion-icon>Numéro Téléphone</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody [hidden]=!clientpass>
+            <ng-container *ngIf="Puser">
+            <ng-container *ngFor="let item of items;let i = index">
+             <tr>
+               <td scope="row" class='thetablerows'>{{item.Nom}}  {{item.Prenom}}</td>
+               <td class='thetablerows'> {{item.Email}} </td>
+               <td class='thetablerows'>{{item.NumT}}</td>
+               <td>
+                 <ion-button color='success' (click)="setvalues(i);openModal(Clientmodif);"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+                 <ion-button color='danger' style="margin-left:3%;" (click)="DeleteClient(i);"><ion-icon name="trash-bin"></ion-icon></ion-button>
+               </td>
+             </tr>
+            </ng-container> 
+          </ng-container> 
+          </tbody>
+          <tbody [hidden]=clientpass>
+            <ng-container *ngIf="Cuser">
+            <ng-container *ngFor="let item of Cuser;let i = index">
+             <tr>
+               <td scope="row" class='thetablerows'>{{item.nom}}  {{item.prenom}}</td>
+               <td class='thetablerows'> {{item.Email}} </td>
+               <td class='thetablerows'>{{item.NumT}}</td>
+               <td>
+                
+               </td>
+             </tr>
+            </ng-container> 
+          </ng-container> 
+          </tbody>
+        </table>
+      </div>
+
+  </ion-card>
+</ion-content>
+<!-- Modal Client goes here-->
+<ng-template #Client let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="ClientAj">Ajouter un Client</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+      <div class="form-group">
+        <!-- Nom & Prenom -->
+        <div class="form-group">
+          <label class='salute'> Nom & Prenom : </label>
+        <div class="form-inline">
+          <input type="text" [(ngModel)]="Nom" class="form-control mb-2 mr-sm-4" placeholder="Nom" required>
+          <input type="text" [(ngModel)]="Prenom" class="form-control mb-2 mr-sm-4" placeholder="Prenom"required>
+        </div>
+        </div>
+        <!-- End of Nom & Prenom-->
+       
+        <!-- Email -->
+        <div class="form-group">
+          <label class='salute'> Email : </label>
+          <input type="email" [(ngModel)]="Email" placeholder="Adresse Email"class="form-control"  required>
+        </div>
+        <!--end of Email-->
+        <!--Genre-->
+        <div class="form-group">
+          <label class='salute'> Genre : </label>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" value="Male"  [(ngModel)]="Gender" name="Genre" id="Genre" checked>Homme
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio"   class="form-check-input" value="Female"  [(ngModel)]="Gender" name="Genre" id="Genre">Femme
+          </label>
+        </div>
+      </div>
+        <!--End of Genre -->
+        <!--Date Naissance-->
+        <label class='salute'for="dateOfBirth">Date de Naissance :</label>
+        <div class="input-group">
+          <input id="dateOfBirth" class="form-control" placeholder="Année-Mois-Jour" [(ngModel)]='DateN' name="dp" ngbDatepicker #dp="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+          </div>
+        </div>
+        <!--end of date Naissance-->
+        <!--Numero de Telephone-->
+        <div class="form-group">
+          <label class='salute'> Numero du Téléphone : </label>
+          <input type="tel" maxlength="8" [(ngModel)]="NumT" placeholder="Numero Telephone"class="form-control"  required>
+        </div>
+        <!--End of Numero de telephone-->
+
+      </div>
+   
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark success" (click)="AddClient();">Ajouter Client</button>
+    <button type="button" class="btn btn-outline-dark danger"(click)="modal.dismiss('Cross click')" >Annuler</button>
+  </div>
+</ng-template>
+<!--Modal Client ends here-->
+<!-- Modal Client Modification -->
+<ng-template #Clientmodif let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="ClientAj">Modification</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+      <div class="form-group">
+        <!-- Nom & Prenom -->
+        <div class="form-group">
+          <label class='salute'> Nom & Prenom : </label>
+        <div class="form-inline">
+          <input type="text" [(ngModel)]="Nom" class="form-control mb-2 mr-sm-4" placeholder="Nom" required>
+          <input type="text" [(ngModel)]="Prenom" class="form-control mb-2 mr-sm-4" placeholder="Prenom"required>
+        </div>
+        </div>
+        <!-- End of Nom & Prenom-->
+       
+        <!-- Email -->
+        <div class="form-group">
+          <label class='salute'> Email : </label>
+          <input type="email" [(ngModel)]="Email" placeholder="Adresse Email"class="form-control"  required>
+        </div>
+        <!--end of Email-->
+        <!--Genre-->
+        <div class="form-group">
+          <label class='salute'> Genre : </label>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" value="Male" [(ngModel)]="Gender" id="Genre">Male
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input"value="Female" [(ngModel)]="Gender" id="Genre">Female
+          </label>
+        </div>
+      </div>
+        <!--End of Genre -->
+        <!--Date Naissance-->
+        <label class='salute'for="dateOfBirth">Date de Naissance :</label>
+        <div class="input-group">
+          <input id="dateOfBirth" class="form-control" placeholder="Année-Mois-Jour" [(ngModel)]='DateN' name="dp" ngbDatepicker #dp="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+          </div>
+        </div>
+        <!--end of date Naissance-->
+        <!--Numero de Telephone-->
+        <div class="form-group">
+          <label class='salute'> Numero du Téléphone : </label>
+          <input type="tel" maxlength="8" [(ngModel)]="NumT" placeholder="Numero Telephone"class="form-control"  required>
+        </div>
+        <!--End of Numero de telephone-->
+
+      </div>
+   
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-outline-dark success" (click)="updateClient();">Enregistrer</button>
+    <button type="button" class="btn btn-outline-dark danger"(click)="modal.dismiss('Cross click');annule()" >Annuler</button>
+  </div>
+</ng-template>
+<!-- Modal Client Modification -->
