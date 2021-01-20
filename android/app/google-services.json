@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1019227081545",
+    "project_id": "prdv-ce7fa",
+    "storage_bucket": "prdv-ce7fa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019227081545:android:e1616699c57daeadc62898",
+        "android_client_info": {
+          "package_name": "io.RDV.alpha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1019227081545-eujpj5iqdp7o3qseqii2p1hav7a3qsm4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyVvhPBzh0iDKjinm4ZMZURwpuRmH1tRc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1019227081545-eujpj5iqdp7o3qseqii2p1hav7a3qsm4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
